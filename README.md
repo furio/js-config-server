@@ -3,7 +3,7 @@ A tentative node.j based config server for microservices or anything else
 
 In the works...
 
-Possible roadmaps:
+Possible roadmap:
 * Basic local repo
 * Output other formats (yml/xml)
 * Add git repository
