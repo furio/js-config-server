@@ -1,5 +1,5 @@
 # js-config-server
-A tentative node.j based config server for microservices or anything else
+A tentative node.js based config server for microservices or anything else
 
 In the works...
 
