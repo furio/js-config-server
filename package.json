@@ -15,6 +15,7 @@
     "nodegit": "*",
     "yamljs": "*",
     "js2xmlparser": "*",
-    "winston": "*"
+    "winston": "*",
+    "fs-extra": "*"
   }
 }
