@@ -1,6 +1,7 @@
 var express = require('express');
 var path = require('path');
-var logger = require('morgan');
+var LOG = require('./logger.js');
+var morgan = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
@@ -10,7 +11,7 @@ var configData = require("./lib/config");
 var indexRoute = require('./routes/index');
 var configsRoute = require('./routes/appConfigs')(configData);
 
-app.use(logger('dev'));
+app.use(morgan((app.get('env') !== 'production') ? 'dev' : 'combined', { stream: LOG.morganStream}));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(cookieParser());

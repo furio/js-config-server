@@ -14,6 +14,7 @@
     "morgan": "~1.7.0",
     "nodegit": "*",
     "yamljs": "*",
-    "js2xmlparser": "*"
+    "js2xmlparser": "*",
+    "winston": "*"
   }
 }
