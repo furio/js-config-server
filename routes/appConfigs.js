@@ -5,7 +5,7 @@ var outConverterLibrary = require(path.resolve(__dirname, "./../lib/output-conve
 
 var generateRouter = function(configData) {
     var router = express.Router();
-    var repository = repositoryLibrary(configData.repo.type, configData.repo.options);
+    var repository = repositoryLibrary(configData);
 
     router.use(function(req,res,next) {
         repository.checkStatus()
