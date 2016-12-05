@@ -1,14 +1,14 @@
 var express = require('express');
 var path = require("path");
-var repositoryLibrary = require(path.resolve(__dirname, "./../lib/repo"));
+var Repository = require(path.resolve(__dirname, "./../lib/repo"));
 var outConverterLibrary = require(path.resolve(__dirname, "./../lib/output-converter"));
 
 var generateRouter = function(configData) {
     var router = express.Router();
-    var repository = repositoryLibrary(configData);
+    var repository = new Repository(configData);
 
     router.use(function(req,res,next) {
-        repository.checkStatus()
+        repository.healthCheck()
             .then(function(status){
                 if (status) {
                     return next();

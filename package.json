@@ -1,6 +1,6 @@
 {
   "name": "js-config-server",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "private": true,
   "scripts": {
     "start": "node ./bin/www"
@@ -16,6 +16,7 @@
     "yamljs": "*",
     "js2xmlparser": "*",
     "winston": "*",
-    "fs-extra": "*"
+    "fs-extra": "*",
+    "validator": "*"
   }
 }
