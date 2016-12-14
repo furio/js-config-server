@@ -1,11 +1,22 @@
 {
   "name": "js-config-server",
-  "version": "0.0.1",
-  "engines" : { "node" : ">0.12" },
-  "author": "Francesco Furiani",
+  "title": "js-config-server",
+  "description": "A REST config server written in JavaScript.",
   "homepage": "https://github.com/furio/js-config-server",
+  "version": "0.0.1",
+  "license": "MIT",
+  "author":  {
+    "name": "Francesco Furiani",
+    "url": "https://github.com/furio"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/furio/js-config-server.git"
+  },
+  "engines" : { "node" : ">0.12" },
   "scripts": {
-    "start": "node ./bin/www"
+    "start": "node ./bin/www",
+    "test": "mocha ./test"
   },
   "dependencies": {
     "bluebird": "~3.4.6",
@@ -19,6 +30,10 @@
     "js2xmlparser": "~2.0.2",
     "winston": "~2.3.0",
     "fs-extra": "~1.0.0",
-    "validator": "~6.2.0"
+    "validator": "~6.2.0",
+    "crypto-js": "~3.1.9-1"
+  },
+  "devDependencies": {
+    "mocha": "*"
   }
 }
