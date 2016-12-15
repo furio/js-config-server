@@ -1,4 +1,7 @@
-var assert = require('assert');
+var chai = require('chai');
+chai.use(require('chai-as-promised'));
+var assert = chai.assert;
+
 var CryptoJS = require("crypto-js");
 var JsonEncryptedFieldsFilter = require('../../../../lib/repo-data-filters/json-encrypted-fields/index');
 
@@ -7,19 +10,22 @@ describe('JsonEncryptedFieldsFilter({})', function() {
         it('should return the empty JSON as input', function() {
             var Filter = new JsonEncryptedFieldsFilter({});
             var jsonData = {};
-            assert.deepEqual(jsonData, Filter.filterData(jsonData));
+
+            return assert.eventually.deepEqual(Filter.filterData(jsonData), jsonData);
         });
 
         it('should return the same flat JSON as input', function() {
             var Filter = new JsonEncryptedFieldsFilter({});
             var jsonData = {a: "b", c: 2};
-            assert.deepEqual(jsonData, Filter.filterData(jsonData));
+
+            return assert.eventually.deepEqual(Filter.filterData(jsonData), jsonData);
         });
 
         it('should return the same JSON as input', function() {
             var Filter = new JsonEncryptedFieldsFilter({});
             var jsonData = {data:"string", object:{data:"string", arr:[{a:{b:{c:1}}}, 2, "data", {}]}};
-            assert.deepEqual(jsonData, Filter.filterData(jsonData));
+
+            return assert.eventually.deepEqual(Filter.filterData(jsonData), jsonData);
         });
     });
 });
@@ -37,22 +43,24 @@ describe('JsonEncryptedFieldsFilter({crypt: "aes", key: "123"})', function() {
         it('should return the empty JSON as input', function() {
             var Filter = new JsonEncryptedFieldsFilter(jsonFilterOptions);
             var jsonData = {};
-            assert.deepEqual(jsonData, Filter.filterData(jsonData));
+
+            return assert.eventually.deepEqual(Filter.filterData(jsonData), jsonData);
         });
 
         it('should return the same flat JSON as input', function() {
-
             var Filter = new JsonEncryptedFieldsFilter(jsonFilterOptions);
             var jsonData = {a: "string", c: "2"};
             var encJsonData = {a: cryptInput("string"), c: cryptInput("2")};
-            assert.deepEqual(jsonData, Filter.filterData(encJsonData));
+
+            return assert.eventually.deepEqual(Filter.filterData(encJsonData), jsonData);
         });
 
         it('should return the same JSON as input', function() {
             var Filter = new JsonEncryptedFieldsFilter(jsonFilterOptions);
             var jsonData = {data: "string", object:{data: "string", arr:[{a:{b:{c: "1"}}}, "2", "data", {}]}};
             var encJsonData = {data: cryptInput("string"), object:{data: cryptInput("string"), arr:[{a:{b:{c: cryptInput("1")}}}, cryptInput("2"), cryptInput("data"), {}]}};
-            assert.deepEqual(jsonData, Filter.filterData(encJsonData));
+
+            return assert.eventually.deepEqual(Filter.filterData(encJsonData), jsonData);
         });
     });
 });
@@ -70,22 +78,24 @@ describe('JsonEncryptedFieldsFilter({crypt: "aes", key: "456", fieldSelection: "
         it('should return the empty JSON as input', function() {
             var Filter = new JsonEncryptedFieldsFilter(jsonFilterOptions);
             var jsonData = {};
-            assert.deepEqual(jsonData, Filter.filterData(jsonData));
+
+            return assert.eventually.deepEqual(Filter.filterData(jsonData), jsonData);
         });
 
         it('should return the same flat JSON as input', function() {
-
             var Filter = new JsonEncryptedFieldsFilter(jsonFilterOptions);
             var jsonData = {a: "string", c: 2};
             var encJsonData = {a: cryptInput("string"), c: 2};
-            assert.deepEqual(jsonData, Filter.filterData(encJsonData));
+
+            return assert.eventually.deepEqual(Filter.filterData(encJsonData), jsonData);
         });
 
         it('should return the same JSON as input', function() {
             var Filter = new JsonEncryptedFieldsFilter(jsonFilterOptions);
             var jsonData = {data: "string", object:{data: "string", arr:[{a:{b:{c: 1}}}, 2, "data", {}]}};
             var encJsonData = {data: cryptInput("string"), object:{data: cryptInput("string"), arr:[{a:{b:{c: 1}}}, 2, cryptInput("data"), {}]}};
-            assert.deepEqual(jsonData, Filter.filterData(encJsonData));
+
+            return assert.eventually.deepEqual(Filter.filterData(encJsonData), jsonData);
         });
     });
 });
@@ -101,22 +111,24 @@ describe('JsonEncryptedFieldsFilter({crypt: "rabbit", key: "123"})', function() 
         it('should return the empty JSON as input', function() {
             var Filter = new JsonEncryptedFieldsFilter(jsonFilterOptions);
             var jsonData = {};
-            assert.deepEqual(jsonData, Filter.filterData(jsonData));
+
+            return assert.eventually.deepEqual(Filter.filterData(jsonData), jsonData);
         });
 
         it('should return the same flat JSON as input', function() {
-
             var Filter = new JsonEncryptedFieldsFilter(jsonFilterOptions);
             var jsonData = {a: "string", c: "2"};
             var encJsonData = {a: cryptInput("string"), c: cryptInput("2")};
-            assert.deepEqual(jsonData, Filter.filterData(encJsonData));
+
+            return assert.eventually.deepEqual(Filter.filterData(encJsonData), jsonData);
         });
 
         it('should return the same JSON as input', function() {
             var Filter = new JsonEncryptedFieldsFilter(jsonFilterOptions);
             var jsonData = {data: "string", object:{data: "string", arr:[{a:{b:{c: "1"}}}, "2", "data", {}]}};
             var encJsonData = {data: cryptInput("string"), object:{data: cryptInput("string"), arr:[{a:{b:{c: cryptInput("1")}}}, cryptInput("2"), cryptInput("data"), {}]}};
-            assert.deepEqual(jsonData, Filter.filterData(encJsonData));
+
+            return assert.eventually.deepEqual(Filter.filterData(encJsonData), jsonData);
         });
     });
 });
@@ -132,22 +144,24 @@ describe('JsonEncryptedFieldsFilter({crypt: "rabbit", key: "456", fieldSelection
         it('should return the empty JSON as input', function() {
             var Filter = new JsonEncryptedFieldsFilter(jsonFilterOptions);
             var jsonData = {};
-            assert.deepEqual(jsonData, Filter.filterData(jsonData));
+
+            return assert.eventually.deepEqual(Filter.filterData(jsonData), jsonData);
         });
 
         it('should return the same flat JSON as input', function() {
-
             var Filter = new JsonEncryptedFieldsFilter(jsonFilterOptions);
             var jsonData = {a: "string", c: 2};
             var encJsonData = {a: cryptInput("string"), c: 2};
-            assert.deepEqual(jsonData, Filter.filterData(encJsonData));
+
+            return assert.eventually.deepEqual(Filter.filterData(encJsonData), jsonData);
         });
 
         it('should return the same JSON as input', function() {
             var Filter = new JsonEncryptedFieldsFilter(jsonFilterOptions);
             var jsonData = {data: "string", object:{data: "string", arr:[{a:{b:{c: 1}}}, 2, "data", {}]}};
             var encJsonData = {data: cryptInput("string"), object:{data: cryptInput("string"), arr:[{a:{b:{c: 1}}}, 2, cryptInput("data"), {}]}};
-            assert.deepEqual(jsonData, Filter.filterData(encJsonData));
+
+            return assert.eventually.deepEqual(Filter.filterData(encJsonData), jsonData);
         });
     });
 });
