@@ -27,8 +27,10 @@ describe('JsonEncryptedFieldsFilter({})', function() {
 describe('JsonEncryptedFieldsFilter({crypt: "aes", key: "123"})', function() {
     var cryptKey = "123";
     var jsonFilterOptions = {crypt: "aes", key: cryptKey};
+    var aesIV = CryptoJS.PBKDF2(cryptKey, 'all');
+
     var cryptInput = function(input) {
-        return CryptoJS.AES.encrypt(input, cryptKey).toString();
+        return CryptoJS.AES.encrypt(input, cryptKey, { iv: aesIV, mode: CryptoJS.mode.OFB, padding: CryptoJS.pad.NoPadding }).toString();
     };
 
     describe('#filterData()', function() {
@@ -58,8 +60,10 @@ describe('JsonEncryptedFieldsFilter({crypt: "aes", key: "123"})', function() {
 describe('JsonEncryptedFieldsFilter({crypt: "aes", key: "456", fieldSelection: "enc"})', function() {
     var cryptKey = "456";
     var jsonFilterOptions = {crypt: "aes", key: cryptKey, fieldSelection: "enc"};
+    var aesIV = CryptoJS.PBKDF2(cryptKey, 'enc');
+
     var cryptInput = function(input) {
-        return "<enc>" + CryptoJS.AES.encrypt(input, cryptKey).toString();
+        return "<enc>" + CryptoJS.AES.encrypt(input, cryptKey, { iv: aesIV, mode: CryptoJS.mode.OFB, padding: CryptoJS.pad.NoPadding }).toString();
     };
 
     describe('#filterData()', function() {
