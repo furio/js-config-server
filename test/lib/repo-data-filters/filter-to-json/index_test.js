@@ -10,7 +10,7 @@ describe('DataToJsonFilter({})', function() {
             var Filter = new DataToJsonFilter({});
             var jsonData = "";
 
-            return assert.isRejected(Filter.filterData(jsonData));
+            assert.throws(function () { Filter.filterData(jsonData); }, Error);
         });
 
         it('should return a JSON parsed over the input string', function() {
@@ -18,7 +18,7 @@ describe('DataToJsonFilter({})', function() {
             var jsonData = '{"a": "b", "c": 2}';
             var jsonParsed = {a: 'b', c: 2};
 
-            return assert.eventually.deepEqual(Filter.filterData(jsonData), jsonParsed);
+            assert.deepEqual(Filter.filterData(jsonData), jsonParsed);
         });
     });
 });
