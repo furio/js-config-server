@@ -26,11 +26,13 @@ A repo can be _local_ or _git_ :
 
 ## Tentative roadmap
 
-* Basic local repo `done`
-* Output other formats (yml/xml) `done`
-* Add git repository `done`
-* Encrypt support (field and file based)
-* Basic http auth (global)
-* Client lib (minimal) `done`
-* Vault support
+- [x] Basic local repo
+- [x] Output other formats (yml/xml)
+- [x] Add git repository
+- [x] Encrypt support (field and file based)
+- [ ] Basic http auth (global)
+- [x] Client lib (minimal)
+- [ ] Vault support
+- [ ] Filters local to repository
+- [ ] Repository fs union
 
