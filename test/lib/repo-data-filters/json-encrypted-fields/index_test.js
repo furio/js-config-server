@@ -32,10 +32,9 @@ describe('JsonEncryptedFieldsFilter({})', function() {
 
 describe('JsonEncryptedFieldsFilter({crypt: "aes", key: "123"})', function() {
     var jsonFilterOptions = {crypt: "aes", key: "123"};
-    var aesIV = CryptoJS.PBKDF2(jsonFilterOptions.key, jsonFilterOptions.crypt);
 
     var cryptInput = function(input) {
-        return CryptoJS.AES.encrypt(input, jsonFilterOptions.key, { iv: aesIV, mode: CryptoJS.mode.OFB, padding: CryptoJS.pad.NoPadding }).toString();
+        return CryptoJS.AES.encrypt(input, jsonFilterOptions.key).toString();
     };
 
     describe('#filterData()', function() {
@@ -66,10 +65,9 @@ describe('JsonEncryptedFieldsFilter({crypt: "aes", key: "123"})', function() {
 
 describe('JsonEncryptedFieldsFilter({crypt: "aes", key: "456", fieldSelection: "enc"})', function() {
     var jsonFilterOptions = {crypt: "aes", key: "456", fieldSelection: "enc"};
-    var aesIV = CryptoJS.PBKDF2(jsonFilterOptions.key, jsonFilterOptions.crypt);
 
     var cryptInput = function(input) {
-        return "<enc>" + CryptoJS.AES.encrypt(input, jsonFilterOptions.key, { iv: aesIV, mode: CryptoJS.mode.OFB, padding: CryptoJS.pad.NoPadding }).toString();
+        return "<enc>" + CryptoJS.AES.encrypt(input, jsonFilterOptions.key).toString();
     };
 
     describe('#filterData()', function() {

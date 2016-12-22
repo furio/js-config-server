@@ -10,8 +10,7 @@ describe('FilterData', function() {
     var DataToJsonFilter = require('../../../lib/repo-data-filters/filter-to-json/index');
     var JsonEncryptedFieldsFilter = require('../../../lib/repo-data-filters/json-encrypted-fields/index');
     var cryptInput = function(input, key, encType) {
-        var aesIV = CryptoJS.PBKDF2(key, encType);
-        return CryptoJS.AES.encrypt(input, key, { iv: aesIV, mode: CryptoJS.mode.OFB, padding: CryptoJS.pad.NoPadding }).toString();
+        return CryptoJS.AES.encrypt(input, key).toString();
     };
     var cryptFieldInput = function(input, key, encType) {
         return "<enc>"+cryptInput(input, key, encType);
