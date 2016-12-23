@@ -6,8 +6,8 @@ var CryptoJS = require("crypto-js");
 var FilterData = require('../../../lib/repo-data-filters/filter');
 
 describe('FilterData', function() {
-    var JsonEncryptedFullFilter = require('../../../lib/repo-data-filters/json-encrypted-full/index');
-    var DataToJsonFilter = require('../../../lib/repo-data-filters/filter-to-json/index');
+    var JsonEncryptedFullFilter = require('../../../lib/repo-data-filters/full-encrypted-to-raw');
+    var DataToJsonFilter = require('../../../lib/repo-data-filters/raw-json-to-json');
     var JsonEncryptedFieldsFilter = require('../../../lib/repo-data-filters/json-encrypted-fields/index');
     var cryptInput = function(input, key, encType) {
         return CryptoJS.AES.encrypt(input, key).toString();
@@ -16,16 +16,16 @@ describe('FilterData', function() {
         return "<enc>"+cryptInput(input, key, encType);
     };
 
-    describe('#([filter-to-json])', function() {
+    describe('#([raw-json-to-json])', function() {
     });
 
     describe('#([json-encrypted-field])', function() {
     });
 
-    describe('#([json-encrypted-full])', function() {
+    describe('#([full-encrypted-to-raw])', function() {
     });
 
-    describe('#([json-encrypted-full,filter-to-json])', function() {
+    describe('#([full-encrypted-to-raw,raw-json-to-json])', function() {
         var rawData = '{"a": "string", "c": 2}';
         var jsonData = JSON.parse(rawData);
 
@@ -40,7 +40,7 @@ describe('FilterData', function() {
         });
     });
 
-    describe('#([filter-to-json,json-encrypted-field])', function() {
+    describe('#([raw-json-to-json,json-encrypted-field])', function() {
         var jsonEncData = {a: cryptFieldInput("string", "123", "aes"), c: 2};
         var rawData = JSON.stringify(jsonEncData);
         var jsonData = {a: "string", c: 2};

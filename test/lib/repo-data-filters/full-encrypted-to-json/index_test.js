@@ -3,9 +3,9 @@ chai.use(require('chai-as-promised'));
 var assert = chai.assert;
 
 var CryptoJS = require("crypto-js");
-var JsonEncryptedFullFilter = require('../../../../lib/repo-data-filters/json-encrypted-full/index');
+var JsonEncryptedFullFilter = require('../../../../lib/repo-data-filters/full-encrypted-to-raw');
 
-describe('JsonEncryptedFullFilter({})', function() {
+describe('FullEncryptedToRawFilter({})', function() {
     describe('#filterData()', function() {
         it('should return the empty JSON string as input', function() {
             var Filter = new JsonEncryptedFullFilter({});
@@ -23,7 +23,7 @@ describe('JsonEncryptedFullFilter({})', function() {
     });
 });
 
-describe('JsonEncryptedFullFilter({crypt: "aes", key: "123"})', function() {
+describe('FullEncryptedToRawFilter({crypt: "aes", key: "123"})', function() {
     var jsonFilterOptions = {crypt: "aes", key: "123"};
     var cryptInput = function(input) {
         return CryptoJS.AES.encrypt(input, jsonFilterOptions.key).toString();
@@ -46,7 +46,7 @@ describe('JsonEncryptedFullFilter({crypt: "aes", key: "123"})', function() {
     });
 });
 
-describe('JsonEncryptedFullFilter({crypt: "rabbit", key: "123"})', function() {
+describe('FullEncryptedToRawFilter({crypt: "rabbit", key: "123"})', function() {
     var jsonFilterOptions = {crypt: "rabbit", key: "123"};
 
     var cryptInput = function(input) {

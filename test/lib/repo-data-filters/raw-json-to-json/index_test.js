@@ -2,9 +2,9 @@ var chai = require('chai');
 chai.use(require('chai-as-promised'));
 var assert = chai.assert;
 
-var DataToJsonFilter = require('../../../../lib/repo-data-filters/filter-to-json/index');
+var DataToJsonFilter = require('../../../../lib/repo-data-filters/raw-json-to-json');
 
-describe('DataToJsonFilter({})', function() {
+describe('RawJsonToJsonFilter({})', function() {
     describe('#filterData()', function() {
         it('should return error with empty string', function() {
             var Filter = new DataToJsonFilter({});
