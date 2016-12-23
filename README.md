@@ -16,13 +16,17 @@ repo:
   options:
     type: local
     uri: /home/furio/git/personal/js-config-server-temp
-filters:
-  - type: filter-to-json
+  filters:
+    - type: full-encrypted-to-raw
+      crypt: aes
+      key: myreporawkey
+    - type: raw-json-to-json
+
 ```
 
-A repo can be _local_ or _git_ :
-* if local it needs just a local directory
-* if git it needs either a local directory or a remote http(s) repository and a local uri where to clone
+This example read from a local _git_ reposiory in which the files are base64 encoded AES crypted files that contains a JSON.
+
+More stuff is possible... The only limitation is that the last filter must return a JSON.
 
 ## Tentative roadmap
 
@@ -33,6 +37,6 @@ A repo can be _local_ or _git_ :
 - [ ] Basic http auth (global)
 - [x] Client lib (minimal)
 - [ ] Vault support
-- [ ] Filters local to repository
+- [x] Filters local to repository
 - [ ] Repository fs union
 
