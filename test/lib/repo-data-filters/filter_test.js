@@ -29,6 +29,16 @@ describe('FilterData', function() {
         var rawData = '{"a": "string", "c": 2}';
         var jsonData = JSON.parse(rawData);
 
+        it('should return an Error because of a key mismatch', function() {
+            var filter1 = new JsonEncryptedFullFilter({crypt: "aes", key: "123"});
+            var filter2 = new DataToJsonFilter();
+            var Combined = new FilterData([filter1, filter2]);
+
+            var cryptedRawData = cryptInput(rawData, "456", "aes");
+
+            return assert.isRejected(Combined.filterData(cryptedRawData));
+        });
+
         it('should return the JSON version of the string JSON input', function() {
             var filter1 = new JsonEncryptedFullFilter({crypt: "aes", key: "123"});
             var filter2 = new DataToJsonFilter();
@@ -44,6 +54,16 @@ describe('FilterData', function() {
         var jsonEncData = {a: cryptFieldInput("string", "123", "aes"), c: 2};
         var rawData = JSON.stringify(jsonEncData);
         var jsonData = {a: "string", c: 2};
+
+        it('should return an Error because of wrong stringified JSON', function() {
+            var filter2 = new JsonEncryptedFieldsFilter({crypt: "aes", key: "123", fieldSelection: "enc"});
+            var filter1 = new DataToJsonFilter();
+            var Combined = new FilterData([filter1, filter2]);
+
+            var brokenRawData = rawData.substr(0, Math.ceil(rawData.length / 2) );
+
+            return assert.isRejected(Combined.filterData(brokenRawData));
+        });
 
         it('should return the JSON version of the string JSON input', function() {
             var filter2 = new JsonEncryptedFieldsFilter({crypt: "aes", key: "123", fieldSelection: "enc"});
